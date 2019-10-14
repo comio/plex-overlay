@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<repositories version="1.0">
+	<repo quality="experimental" status="unofficial">
+		<name>plex-overlay</name>
+		<description lang="en">Personal overlay of comio containing Plex related ebuilds</description>
+		<homepage>https://github.com/comio/plex-overlay</homepage>
+		<owner type="person">
+			<email>luigi.mantellini@gmail.com</email>
+			<name>Luigi Mantellini</name>
+		</owner>
+		<source type="git">https://github.com/comio/plex-overlay.git</source>
+		<feed>https://github.com/comio/plex-overlay/commits/master.atom</feed>
+	</repo>
+</repositories>
