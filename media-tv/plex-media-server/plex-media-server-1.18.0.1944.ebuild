@@ -146,8 +146,8 @@ pkg_postinst() {
 	elog "Plex Media Server is now installed. Please check the configuration file in /etc/${_SHORTNAME}/${_APPNAME} to verify the default settings."
 	elog "To start the Plex Server, run 'rc-config start plex-media-server', you will then be able to access your library at http://<ip>:32400/web/"
 	einfo ""
-	einfo "The fkmclane/overlay/${CATEGORY}-${PN} will not supported and updated in the next future. Please migrate to comio/plex-overlay or another"
-	einfo "overlay if you prefer in order to have future updates."
+	einfo "The fkmclane/overlay/${CATEGORY}-${PN} will not be supported and updated in the next future. Please migrate to comio/plex-overlay or"
+	einfo "another overlay if you prefer in order to have future updates."
 
 }
 
