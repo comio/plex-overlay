@@ -19,6 +19,7 @@
 	</upstream>
 	<use>
 		<flag name="pax_kernel">Add PaX markings to executables</flag>
-		<flag name="system-openssl">Add PaX markings to executables</flag>
+		<flag name="system-openssl">Use system openssl library</flag>
+		<flag name="avahi">Add net-dns/avahi dependency</flag>
 	</use>
 </pkgmetadata>
