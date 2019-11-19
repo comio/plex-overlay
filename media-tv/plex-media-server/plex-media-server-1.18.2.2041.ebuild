@@ -35,6 +35,8 @@ DEPEND="
 	dev-python/virtualenv[${PYTHON_USEDEP}]"
 
 RDEPEND="
+	acct-user/plex
+	acct-group/plex
 	avahi? ( net-dns/avahi )
 	system-openssl? ( dev-libs/openssl:0 )
 	${PYTHON_DEPS}"
