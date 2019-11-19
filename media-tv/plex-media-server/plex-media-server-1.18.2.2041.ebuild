@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
-inherit eutils user systemd unpacker pax-utils python-single-r1
+inherit eutils systemd unpacker pax-utils python-single-r1
 
 COMMIT="3d469cb32"
 
@@ -63,8 +63,6 @@ PATCHES=(
 )
 
 pkg_setup() {
-	enewgroup ${_USERNAME}
-	enewuser ${_USERNAME} -1 /bin/bash /var/lib/${_APPNAME} "${_USERNAME},video"
 	python-single-r1_pkg_setup
 }
 
