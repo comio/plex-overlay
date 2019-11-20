@@ -32,7 +32,8 @@ IUSE="pax_kernel system-openssl avahi"
 
 DEPEND="
 	pax_kernel? ( sys-apps/fix-gnustack )
-	dev-python/virtualenv[${PYTHON_USEDEP}]"
+	dev-python/virtualenv[${PYTHON_USEDEP}]
+	dev-util/patchelf"
 
 RDEPEND="
 	acct-user/plex
@@ -126,6 +127,9 @@ src_install() {
 	local INIT_NAME="${PN}.service"
 	local INIT="${FILESDIR}/systemd/${INIT_NAME}"
 	systemd_newunit "${INIT}" "${INIT_NAME}"
+
+	# Fix RPATH
+	patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED%/}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_codecs_kr.so || die
 
 	# Add PaX marking for hardened systems
 	if use pax_kernel; then
