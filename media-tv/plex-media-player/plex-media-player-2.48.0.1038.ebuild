@@ -79,6 +79,7 @@ PATCHES=(
 	"${FILESDIR}/git-revision.patch"
 	"${FILESDIR}/dont_copy_qtwebengine_devtools_resources_pak_file.patch"
 	"${FILESDIR}/dont_start_as_fullscreen_tv_by_default.patch"
+	"${FILESDIR}/fix_qpair_usage.patch"
 )
 
 S="${WORKDIR}/${MY_P}"
