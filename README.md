@@ -25,4 +25,4 @@ Packages
 Special Thanks
 --------------
 
-A would like to thank Foster McLane for his overlay (https://github.com/fkmclane/overlay) that has been the starting point for this work.
+I would like to thank Foster McLane for her overlay (https://github.com/fkmclane/overlay) that has been the starting point for this work.
