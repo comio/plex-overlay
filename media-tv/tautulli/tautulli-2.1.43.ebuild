@@ -33,7 +33,7 @@ RDEPEND="
 S="${WORKDIR}/${MY_P}"
 
 src_install() {
-	dodoc API.md CHANGELOG.md CONTRIBUTING.md ISSUE_TEMPLATE.md README.md
+	dodoc API.md CHANGELOG.md CONTRIBUTING.md LICENSE README.md
 	insinto "/opt/${PN}"
 	doins -r contrib data lib plexpy pylintrc PlexPy.py Tautulli.py || die
 	dodir "/etc/${PN}"
