@@ -53,9 +53,9 @@ BINS_TO_PAX_MARK=(
 
 S="${WORKDIR}"
 PATCHES=(
-	"${FILESDIR}/virtualenv_start_pms.patch"
+	"${FILESDIR}/virtualenv_start_pms.2020.patch"
+        "${FILESDIR}/add_gentoo_profile_as_platform_version.patch"
 	"${FILESDIR}/plexmediamanager.desktop.new.patch"
-	"${FILESDIR}/add_gentoo_profile_as_platform_version.patch"
         "${FILESDIR}/plexmediaserver.service.patch"
 )
 
@@ -64,12 +64,8 @@ src_unpack() {
 }
 
 src_install() {
-	# Move the config to the correct place
-	local config_vanilla="/etc/default/plexmediaserver"
-	local config_path="/etc/${_SHORTNAME}"
-	insinto "${config_path}"
-	doins "${config_vanilla#/}"
-	sed -e "s#${config_vanilla}#${config_path}/${_APPNAME}#g" -i "${S}"/usr/sbin/start_pms || die
+	# Remove Debian apt repo files
+	rm -r "etc/apt" || die
 
 	# Remove Debian specific files
 	rm -r "usr/share/doc" || die
