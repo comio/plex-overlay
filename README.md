@@ -6,12 +6,17 @@ This overlay contains Plex related ebuilds
 Installation
 ------------
 
-The easiest way to add this overlay to your Portage tree is through layman.
+The easiest way to add this overlay to your Portage tree is through eselect repository.
 
+```
+# eselect repository add plex-overlay git https://github.com/comio/plex-overlay
+```
+
+If you prefer to use the legacy layman utility
 ```
 # layman -a plex-overlay
 ```
-
+#
 
 Packages
 --------
