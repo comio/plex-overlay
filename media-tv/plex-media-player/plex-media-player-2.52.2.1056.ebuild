@@ -45,6 +45,7 @@ DEPEND="
 	>=dev-qt/qtdeclarative-${QT_VERSION}
 	>=dev-qt/qtquickcontrols-${QT_VERSION}
 	>=dev-qt/qtx11extras-${QT_VERSION}
+	>=dev-qt/qtdbus-${QT_VERSION}
 	media-video/mpv[libmpv]
 	virtual/opengl
 	x11-libs/libX11
