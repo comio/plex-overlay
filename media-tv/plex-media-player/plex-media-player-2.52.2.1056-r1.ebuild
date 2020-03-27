@@ -81,6 +81,7 @@ PATCHES=(
 	"${FILESDIR}/dont_copy_qtwebengine_devtools_resources_pak_file.patch"
 	"${FILESDIR}/dont_start_as_fullscreen_tv_by_default.patch"
 	"${FILESDIR}/fix_qpair_usage.patch"
+	"${FILESDIR}/fix-video-qt5_14.patch"
 )
 
 S="${WORKDIR}/${MY_P}"
