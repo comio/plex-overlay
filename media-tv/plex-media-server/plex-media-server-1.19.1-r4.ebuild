@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python2_7 )
 inherit eutils systemd unpacker pax-utils python-single-r1
 
-MINOR_VERSION="2673-776106bc6"
+MINOR_VERSION="2701-6327e27bf"
 
 _APPNAME="plexmediaserver"
 _USERNAME="plex"
@@ -24,7 +24,7 @@ SRC_URI="
 SLOT="0"
 LICENSE="Plex"
 RESTRICT="bindist strip mirror"
-KEYWORDS="-* ~amd64 ~x86"
+KEYWORDS="-* amd64 x86"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="
