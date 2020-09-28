@@ -4,4 +4,13 @@ PLEX_PIDFILE="/var/run/plex-media-server.pid"
 PLEX_OUTLOG="/var/log/pms/out.log"
 PLEX_ERRLOG="/var/log/pms/err.log"
 PLEX_USER="plex"
-PLEX_SCRIPT="/usr/sbin/start_pms"
+
+# Where Plex should store the transcodes
+#export TMPDIR=/tmp
+
+# Where Plex keeps its metadata
+export PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/storage/.config/plex"
+
+# Uncomment this to use syslog for logging instead of
+# sending logs to Plex Media Server.log
+# export PLEX_MEDIA_SERVER_USE_SYSLOG=true

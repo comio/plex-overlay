@@ -4,9 +4,9 @@
 EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
-inherit eutils systemd unpacker pax-utils python-single-r1
+inherit eutils systemd unpacker pax-utils
 
-MINOR_VERSION="2854-25d22e39e"
+MINOR_VERSION="3370-b1b651549"
 
 _APPNAME="plexmediaserver"
 _USERNAME="plex"
@@ -25,19 +25,13 @@ SLOT="0"
 LICENSE="Plex"
 RESTRICT="bindist strip mirror"
 KEYWORDS="-* ~amd64 ~x86"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="
-	$(python_gen_cond_dep '
-		dev-python/virtualenv[${PYTHON_MULTI_USEDEP}]
-	')"
 BDEPEND="dev-util/patchelf"
 
 RDEPEND="
 	acct-group/plex
 	acct-user/plex
-	net-dns/avahi
-	${PYTHON_DEPS}"
+	net-dns/avahi"
 
 QA_DESKTOP_FILE="usr/share/applications/plexmediamanager.desktop"
 QA_PREBUILT="*"
@@ -95,22 +89,12 @@ src_install() {
 	patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_codecs_kr.so || die
 
 	# Install systemd service file
-	systemd_newunit "${FILESDIR}/systemd/${PN}.service" "${PN}.service"
+	systemd_newunit "${ED}"/usr/lib/plexmediaserver/lib/plexmediaserver.service "${PN}.service"
 
 	# Add pax markings to some binaries so that they work on hardened setup
 	for f in "${BINS_TO_PAX_MARK[@]}"; do
 		pax-mark m "${f}"
 	done
-
-	# Install start_pms script
-	into /usr
-	dosbin "${FILESDIR}/start_pms"
-
-	einfo "Configuring virtualenv"
-	virtualenv -v --no-pip --no-setuptools --no-wheel "${ED}"/usr/lib/plexmediaserver/Resources/Python || die
-	pushd "${ED}"/usr/lib/plexmediaserver/Resources/Python &>/dev/null || die
-	find . -type f -exec sed -i -e "s#${D}##g" {} + || die
-	popd &>/dev/null || die
 }
 
 pkg_postinst() {
