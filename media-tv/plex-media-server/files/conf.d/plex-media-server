@@ -9,7 +9,8 @@ PLEX_USER="plex"
 #export TMPDIR=/tmp
 
 # Where Plex keeps its metadata
-export PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/storage/.config/plex"
+# (Default is: '/var/lib/plexmediaserver/Library/Application Support')
+#export PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/storage/.config/plex"
 
 # Uncomment this to use syslog for logging instead of
 # sending logs to Plex Media Server.log
