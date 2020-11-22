@@ -47,7 +47,7 @@ BINS_TO_PAX_MARK=(
 S="${WORKDIR}"
 PATCHES=(
 	"${FILESDIR}/plexmediamanager.desktop.new.patch"
-	"${FILESDIR}/plexmediaserver.service.patch"
+	"${FILESDIR}/plexmediaserver-1.21.service.patch"
 )
 
 src_unpack() {
