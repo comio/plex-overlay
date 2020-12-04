@@ -81,6 +81,7 @@ PATCHES=(
 	"${FILESDIR}/dont_copy_qtwebengine_devtools_resources_pak_file.patch"
 	"${FILESDIR}/fix_qpair_usage.patch"
 	"${FILESDIR}/fix-video-qt5_14.patch"
+	"${FILESDIR}/mpv-0.33.0-use-libmpv-render-api.patch"
 )
 
 S="${WORKDIR}/${MY_P}"
