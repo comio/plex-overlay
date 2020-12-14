@@ -22,11 +22,11 @@ RESTRICT="bindist strip test"
 
 DEPEND="
 	${PYTHON_DEPS}
-	acct-user/tautulli
-	acct-group/tautulli
 "
 
 RDEPEND="
+        acct-user/tautulli
+        acct-group/tautulli
 	media-tv/plex-media-server
 	dev-python/pyopenssl
 	${DEPEND}
