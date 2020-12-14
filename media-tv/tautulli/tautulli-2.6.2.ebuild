@@ -41,6 +41,7 @@ src_install() {
 	keepdir /var/lib/${PN}
         fowners -R ${PN}:${PN} /var/lib/${PN}
 	insinto "/var/lib/${PN}"
+	insopts -m0660 -o ${PN} -g ${PN}
 	doins -r contrib data lib plexpy pylintrc PlexPy.py Tautulli.py || die
 
         insinto /etc/${PN}
