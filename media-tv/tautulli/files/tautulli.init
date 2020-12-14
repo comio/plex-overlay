@@ -1,18 +1,17 @@
 #!/sbin/openrc-run
 # Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 depend() {
         need net
 }
 
 run_dir="/var/run/tautulli"
-pidfile="$run_dir/taultulli.pid"
-etc_dir="/etc/taultulli"
+pidfile="$run_dir/tautulli.pid"
+etc_dir="/etc/tautulli"
 data_dir="/var/lib/tautulli"
 log_dir="/var/log/tautulli"
-log_file="taultulli.log"
+log_file="tautulli.log"
 conf_file="config.ini"
 program="$APP_DIR/Tautulli.py"
 bin=`which python`
