@@ -5,9 +5,9 @@ EAPI=7
 
 inherit acct-user
 
-DESCRIPTION="Plex Media Server user"
-ACCT_USER_ID=103
-ACCT_USER_HOME=/var/lib/plexmediaserver
-ACCT_USER_GROUPS=( plex render video )
+DESCRIPTION="Tautulli user"
+ACCT_USER_ID=636
+ACCT_USER_HOME=/opt/tautulli
+ACCT_USER_GROUPS=( tautulli )
 
 acct-user_add_deps

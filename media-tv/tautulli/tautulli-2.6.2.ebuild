@@ -22,6 +22,7 @@ RESTRICT="mirror bindist strip"
 
 DEPEND="
 	${PYTHON_DEPS}
+	acct-user/tautulli
 "
 
 RDEPEND="
