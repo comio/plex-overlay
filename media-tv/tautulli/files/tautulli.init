@@ -10,16 +10,15 @@ depend() {
 run_dir="/var/run/tautulli"
 pidfile="$run_dir/taultulli.pid"
 etc_dir="/etc/taultulli"
-var_dir="/var/lib/tautulli"
+data_dir="/var/lib/tautulli"
 log_dir="/var/log/tautulli"
 log_file="taultulli.log"
 conf_file="config.ini"
-data_dir="${var_dir)"
-program="Tautulli.py"
+program="$APP_DIR/Tautulli.py"
 bin=`which python`
 
 check_config() {
-    
+
     if [ ! -d "${run_dir}" ]; then
             mkdir "${run_dir}"
     fi
@@ -40,7 +39,7 @@ start() {
         start-stop-daemon --start --background --make-pidfile --pidfile ${pidfile}\
         -u ${USER} -g ${GROUP}\
     --exec ${bin} ${program} -- \
-    --daemon --log=${log_dir}/${log_file} --data_dir ${var_dir}
+    --daemon --log=${log_dir}/${log_file} --conf_file $data_dir/${conf_file} --data_dir ${data_dir}
         eend $?
 }
 
