@@ -1,11 +1,11 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-PYTHON_COMPAT=( python2_7 )
+EAPI="7"
+PYTHON_COMPAT=( python3_8 )
 PYTHON_REQ_USE='sqlite(+)'
 
-inherit python-single-r1 systemd versionator
+inherit python-single-r1 systemd
 
 DESCRIPTION="A python based web application for monitoring your Plex Media Server."
 HOMEPAGE="https://tautulli.com"
@@ -40,5 +40,5 @@ src_install() {
 	dosym "${EPREFIX}/opt/${PN}/config.ini" "/etc/${PN}/config.ini"
 	fowners -R plex:plex "/opt/${PN}"
 
-	systemd_dounit  "${FILESDIR}/${PN}.service"
+	systemd_dounit  "${FILESDIR}/${PN}-py3.service"
 }

@@ -9,7 +9,7 @@ Installation
 The easiest way to add this overlay to your Portage tree is through eselect repository.
 
 ```
-# eselect repository add plex-overlay git https://github.com/comio/plex-overlay
+# eselect repository enable plex-overlay
 ```
 
 If you prefer to use the legacy layman utility
