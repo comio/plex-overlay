@@ -6,7 +6,7 @@ depend() {
         need net
 }
 
-run_dir="/var/run/tautulli"
+run_dir="/run/tautulli"
 pidfile="$run_dir/tautulli.pid"
 etc_dir="/etc/tautulli"
 data_dir="/var/lib/tautulli"
@@ -38,7 +38,7 @@ start() {
         start-stop-daemon --start --background --make-pidfile --pidfile ${pidfile}\
         -u ${USER} -g ${GROUP}\
     --exec ${bin} ${program} -- \
-    --daemon --log=${log_dir}/${log_file} --conf_file $data_dir/${conf_file} --data_dir ${data_dir}
+    --daemon --log=${log_dir}/${log_file} --config $data_dir/${conf_file} --datadir ${data_dir}
         eend $?
 }
 
