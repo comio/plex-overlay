@@ -7,7 +7,6 @@
 	</maintainer>
 	<upstream>
 		<changelog>https://github.com/Tautulli/Tautulli/blob/master/CHANGELOG.md</changelog>
-		<doc>https://github.com/Tautulli/Tautulli/wiki</doc>
+		<doc>https://github.com/Tautulli/Tautulli#readme</doc>
 	</upstream>
-	<use/>
 </pkgmetadata>
