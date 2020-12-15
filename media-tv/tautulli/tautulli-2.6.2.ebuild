@@ -37,6 +37,7 @@ S="${WORKDIR}/${MY_P}"
 src_install() {
 	dodoc API.md CHANGELOG.md CONTRIBUTING.md README.md
         newinitd "${FILESDIR}/${PN}.init" ${PN}
+        newconfd "${FILESDIR}/${PN}.conf" ${PN}
 
 	keepdir /var/lib/${PN}
 	insinto "/var/lib/${PN}"
