@@ -10,8 +10,6 @@ run_dir="/run/tautulli"
 pidfile="${run_dir}/tautulli.pid"
 etc_dir="/etc/tautulli"
 data_dir="/var/lib/tautulli"
-log_dir="/var/log/tautulli"
-log_file="tautulli.log"
 conf_file="config.ini"
 program="$APP_DIR/Tautulli.py"
 bin=`which python`
@@ -38,7 +36,7 @@ start() {
         start-stop-daemon --start --background --make-pidfile --pidfile ${pidfile}\
         -u ${USER} -g ${GROUP}\
     --exec ${bin} ${program} -- \
-    --daemon --log=${log_dir}/${log_file} --config $data_dir/${conf_file} --datadir ${data_dir}
+    --daemon --quiet --nolaunch
         eend $?
 }
 
