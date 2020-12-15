@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit desktop eutils xdg cmake-utils
+inherit desktop eutils xdg cmake
 
 DESCRIPTION="Next generation Plex Desktop/Embedded Client"
 HOMEPAGE="http://plex.tv/"
@@ -17,7 +17,7 @@ WEB_CLIENT_TV_VERSION="4.29.5-13c4ebb"
 MY_PV="${PV}-${COMMIT}"
 MY_P="${PN}-${MY_PV}"
 
-RESTRICT="mirror download? ( network-sandbox )"
+RESTRICT="mirror test"
 
 SRC_URI="
 	https://github.com/plexinc/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz
