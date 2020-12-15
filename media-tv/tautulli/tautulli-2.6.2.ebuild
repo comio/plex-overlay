@@ -52,3 +52,26 @@ src_install() {
 	systemd_dounit  "${FILESDIR}/${PN}.service"
 	systemd_newunit "${FILESDIR}/${PN}.service" "${PN}@.service"
 }
+
+pkg_postinst() {
+        elog "Tautulli is now installed but requires the config.ini file"
+        elog "be generated in /etc/${_SHORTNAME}/${_APPNAME}"
+        elog "To create the initial config.ini"
+        elog "run python /var/lib/${PN}/Tautulli.py then ctrl+c"
+        elog "before starting the system service"
+        elog "you will then be able to access tautulli at"
+        elog "http://<ip>:8181/"
+}
+
+# Adds the precompiled tautulli libraries to the revdep-rebuild's mask list
+# so it doesn't try to rebuild libraries that can't be rebuilt.
+_mask_tautulli_libraries_revdep() {
+        dodir /etc/revdep-rebuild/
+
+        # Bug: 659702. The upstream plex binary installs its precompiled package to /usr/lib.
+        # Due to profile 17.1 splitting /usr/lib and /usr/lib64, we can no longer rely
+        # on the implicit symlink automatically satisfying our revdep requirement when we use $(get_libdir).
+        # Thus we will match upstream's directory automatically. If upstream switches their location,
+        # then so should we.
+        echo "SEARCH_DIRS_MASK=\"${EPREFIX}/usr/lib/tautulli\"" > "${ED}"/etc/revdep-rebuild/80tautulli
+}
