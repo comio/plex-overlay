@@ -24,7 +24,7 @@ check_config() {
     # Quick and ugly but should get the job done.
 
     chown -R ${USER}:${GROUP} "${run_dir}"
-        chown -R ${USER}.${GROUP} "${var_dir}"
+        chown -R ${USER}.${GROUP} "${data_dir}"
     chown -R ${USER}.${GROUP} "${etc_dir}"
 }
 
@@ -36,7 +36,7 @@ start() {
         start-stop-daemon --start --background --make-pidfile --pidfile ${pidfile}\
         -u ${USER} -g ${GROUP}\
     --exec ${bin} ${program} -- \
-    --daemon --quiet --nolaunch
+    --quiet --nolaunch
         eend $?
 }
 
