@@ -3,7 +3,6 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
 inherit eutils systemd unpacker pax-utils
 
 COMMIT="a91458577"
@@ -87,6 +86,7 @@ src_install() {
 	# Fix RPATH
 	patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_codecs_kr.so || die
 	patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_bisect.so || die
+
 	# Install systemd service file
 	systemd_newunit "${ED}"/usr/lib/plexmediaserver/lib/plexmediaserver.service "${PN}.service"
 
