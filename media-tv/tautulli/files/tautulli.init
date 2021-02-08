@@ -1,0 +1,47 @@
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+        need net
+}
+
+run_dir="/run/tautulli"
+pidfile="$run_dir/tautulli.pid"
+etc_dir="/etc/tautulli"
+data_dir="/var/lib/tautulli"
+conf_file="config.ini"
+program="$APP_DIR/Tautulli.py"
+bin=`which python`
+
+check_config() {
+
+    if [ ! -d "${run_dir}" ]; then
+            mkdir "${run_dir}"
+    fi
+
+    # Permission stuff. Should ensure that the daemon user always have write permissions.
+    # Quick and ugly but should get the job done.
+
+    chown -R ${USER}:${GROUP} "${run_dir}"
+        chown -R ${USER}.${GROUP} "${data_dir}"
+    chown -R ${USER}.${GROUP} "${etc_dir}"
+}
+
+start() {
+    check_config
+
+        ebegin "Starting Tautulli"
+
+        start-stop-daemon --start --background --make-pidfile --pidfile ${pidfile}\
+        -u ${USER} -g ${GROUP}\
+    --exec ${bin} ${program} -- \
+    --quiet --nolaunch
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping Tautulli"
+        start-stop-daemon --stop --pidfile ${pidfile} --retry 15
+        eend $?
+}
