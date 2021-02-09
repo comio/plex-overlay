@@ -5,7 +5,7 @@ EAPI=7
 
 inherit eutils systemd unpacker pax-utils
 
-COMMIT="58bd20c02"
+COMMIT="5a0a3e4b2"
 _APPNAME="plexmediaserver"
 _USERNAME="plex"
 _SHORTNAME="${_USERNAME}"
@@ -22,7 +22,7 @@ SRC_URI="
 SLOT="0"
 LICENSE="Plex"
 RESTRICT="bindist strip mirror"
-KEYWORDS="-* amd64 x86"
+KEYWORDS="-* ~amd64 ~x86"
 
 BDEPEND="dev-util/patchelf"
 
@@ -44,13 +44,20 @@ BINS_TO_PAX_MARK=(
 )
 
 S="${WORKDIR}"
-PATCHES=(
-	"${FILESDIR}/plexmediamanager.desktop.new.patch"
-	"${FILESDIR}/plexmediaserver.service.patch"
-)
 
 src_unpack() {
 	unpack_deb ${A}
+}
+
+src_prepare() {
+	eapply "${FILESDIR}/plexmediamanager.desktop.new.patch"
+	if use x86; then
+		eapply "${FILESDIR}/plexmediaserver.service.x86.patch"
+	fi
+	if use amd64; then
+		eapply "${FILESDIR}/plexmediaserver.service.amd64.patch"
+	fi
+	default
 }
 
 src_install() {
