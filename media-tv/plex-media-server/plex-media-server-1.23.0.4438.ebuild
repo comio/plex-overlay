@@ -50,7 +50,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/plexmediamanager.desktop.new.patch"
+	# eapply "${FILESDIR}/plexmediamanager.desktop.new.patch"
 	if use x86; then
 		eapply "${FILESDIR}/plexmediaserver.service.x86.patch"
 	fi
@@ -91,8 +91,8 @@ src_install() {
 	_mask_plex_libraries_revdep
 
 	# Fix RPATH
-	patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_codecs_kr.so || die
-	patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_bisect.so || die
+	# patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_codecs_kr.so || die
+	# patchelf --force-rpath --set-rpath '$ORIGIN:$ORIGIN/../../../../../../lib' "${ED}"/usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_bisect.so || die
 
 	# Install systemd service file
 	systemd_newunit "${ED}"/usr/lib/plexmediaserver/lib/plexmediaserver.service "${PN}.service"
