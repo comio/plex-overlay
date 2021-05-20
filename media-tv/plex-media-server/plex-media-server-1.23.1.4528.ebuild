@@ -50,12 +50,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	if use x86; then
-		eapply "${FILESDIR}/plexmediaserver.service.x86.patch"
-	fi
-	if use amd64; then
-		eapply "${FILESDIR}/plexmediaserver.service.amd64.patch"
-	fi
+	eapply "${FILESDIR}/plexmediaserver.service.amd64.patch"
 	default
 }
 
