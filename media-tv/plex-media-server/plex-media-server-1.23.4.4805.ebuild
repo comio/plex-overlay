@@ -5,7 +5,7 @@ EAPI=7
 
 inherit eutils systemd unpacker pax-utils
 
-COMMIT="ebb5fe9f3"
+COMMIT="186bae04e"
 _APPNAME="plexmediaserver"
 _USERNAME="plex"
 _SHORTNAME="${_USERNAME}"
