@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils systemd unpacker pax-utils
+inherit readme.gentoo-r1 systemd unpacker pax-utils
 
 COMMIT="1a38e63c6"
 _APPNAME="plexmediaserver"
@@ -13,46 +13,38 @@ _FULL_VERSION="${PV}-${COMMIT}"
 
 URI="https://downloads.plex.tv/plex-media-server-new"
 
-DESCRIPTION="A free media library that is intended for use with a plex client"
+DESCRIPTION="Free media library that is intended for use with a plex client"
 HOMEPAGE="https://www.plex.tv/"
 SRC_URI="
 	amd64? ( ${URI}/${_FULL_VERSION}/debian/plexmediaserver_${_FULL_VERSION}_amd64.deb )
-	x86? ( ${URI}/${_FULL_VERSION}/debian/plexmediaserver_${_FULL_VERSION}_i386.deb )
-"
-SLOT="0"
+	x86? ( ${URI}/${_FULL_VERSION}/debian/plexmediaserver_${_FULL_VERSION}_i386.deb )"
+S="${WORKDIR}"
+
 LICENSE="Plex"
-RESTRICT="bindist strip mirror"
+SLOT="0"
 KEYWORDS="-* amd64 x86"
+RESTRICT="mirror bindist"
 
-BDEPEND="dev-util/patchelf"
-
-RDEPEND="
+DEPEND="
 	acct-group/plex
-	acct-user/plex
-	net-dns/avahi"
+	acct-user/plex"
+RDEPEND="${DEPEND}"
+
+PATCHES=(
+	"${FILESDIR}/plexmediaserver.service.amd64.patch" )
 
 QA_DESKTOP_FILE="usr/share/applications/plexmediamanager.desktop"
 QA_PREBUILT="*"
 QA_MULTILIB_PATHS=(
-	"usr/lib/${_APPNAME}/.*"
-	"usr/lib/${_APPNAME}/Resources/Python/lib/python2.7/.*"
+	"usr/lib/plexmediaserver/lib/.*"
+	"usr/lib/plexmediaserver/Resources/Python/lib/python2.7/.*"
+	"usr/lib/plexmediaserver/Resources/Python/lib/python2.7/lib-dynload/_hashlib.so"
 )
 
 BINS_TO_PAX_MARK=(
 	"${ED}/usr/lib/plexmediaserver/Plex Script Host"
 	"${ED}/usr/lib/plexmediaserver/Plex Media Scanner"
 )
-
-S="${WORKDIR}"
-
-src_unpack() {
-	unpack_deb ${A}
-}
-
-src_prepare() {
-	eapply "${FILESDIR}/plexmediaserver.service.amd64.patch"
-	default
-}
 
 src_install() {
 	# Remove Debian apt repo files
@@ -62,27 +54,19 @@ src_install() {
 	rm -r "usr/share/doc" || die
 
 	# Copy main files over to image and preserve permissions so it is portable
-	cp -rp usr/ "${ED}"/ || die
+	cp -rp usr/ "${ED}" || die
 
 	# Make sure the logging directory is created
-	local logging_dir="/var/log/pms"
-	dodir "${logging_dir}"
-	fowners "${_USERNAME}":"${_USERNAME}" "${logging_dir}"
-	keepdir "${logging_dir}"
+	keepdir /var/log/pms
+	fowners plex:plex /var/log/pms
 
 	# Create default library folder with correct permissions
-	local default_library_dir="/var/lib/${_APPNAME}"
-	dodir "${default_library_dir}"
-	fowners "${_USERNAME}":"${_USERNAME}" "${default_library_dir}"
-	keepdir "${default_library_dir}"
+	keepdir /var/lib/plexmediaserver
+	fowners plex:plex /var/lib/plexmediaserver
 
 	# Install the OpenRC init/conf files
-	doinitd "${FILESDIR}/init.d/${PN}"
-	doconfd "${FILESDIR}/conf.d/${PN}"
-
-	# Mask Plex libraries so that revdep-rebuild doesn't try to rebuild them.
-	# Plex has its own precompiled libraries.
-	_mask_plex_libraries_revdep
+	newinitd "${FILESDIR}/${PN}.init.d" ${PN}
+	newconfd "${FILESDIR}/${PN}.conf.d" ${PN}
 
 	# Install systemd service file
 	systemd_newunit "${ED}"/usr/lib/plexmediaserver/lib/plexmediaserver.service "${PN}.service"
@@ -91,26 +75,15 @@ src_install() {
 	for f in "${BINS_TO_PAX_MARK[@]}"; do
 		pax-mark m "${f}"
 	done
+
+	# Adds the precompiled plex libraries to the revdep-rebuild's mask list
+	# so it doesn't try to rebuild libraries that can't be rebuilt.
+	insinto /etc/revdep-rebuild
+	doins "${FILESDIR}"/80plexmediaserver
+
+	readme.gentoo_create_doc
 }
 
 pkg_postinst() {
-	elog "Plex Media Server is now installed. Please check the configuration"
-	elog "file in /etc/${_SHORTNAME}/${_APPNAME}"
-	elog "to verify the default settings."
-	elog "To start the Plex Server, run 'rc-config start plex-media-server',"
-	elog "you will then be able to access your library at"
-	elog "http://<ip>:32400/web/"
-}
-
-# Adds the precompiled plex libraries to the revdep-rebuild's mask list
-# so it doesn't try to rebuild libraries that can't be rebuilt.
-_mask_plex_libraries_revdep() {
-	dodir /etc/revdep-rebuild/
-
-	# Bug: 659702. The upstream plex binary installs its precompiled package to /usr/lib.
-	# Due to profile 17.1 splitting /usr/lib and /usr/lib64, we can no longer rely
-	# on the implicit symlink automatically satisfying our revdep requirement when we use $(get_libdir).
-	# Thus we will match upstream's directory automatically. If upstream switches their location,
-	# then so should we.
-	echo "SEARCH_DIRS_MASK=\"${EPREFIX}/usr/lib/plexmediaserver\"" > "${ED}"/etc/revdep-rebuild/80plexmediaserver
+	readme.gentoo_print_elog
 }
