@@ -25,7 +25,9 @@ Packages
 ### Multimedia
 
 #### Plex [media-tv/plex-media-server, media-tv/plex-media-player, media-tv/tautulli]
-[Plex](http://plex.tv/) is a service that allows convenient access to central media over a variety of devices. Plex Media Player is a new desktop client for Plex that includes a nice ten-foot interface and is designed for connecting to the television. Note: Plex Pass users can add the "~amd64" or "~x86" keywords to the packages to get the latest Plex Pass versions.
+[Plex](http://plex.tv/) is a service that allows convenient access to central media over a variety of devices. 
+
+Note: Plex Pass users can add the "~amd64" or "~x86" keywords to the packages to get the latest Plex Pass versions.
 
 Special Thanks
 --------------
