@@ -12,6 +12,7 @@ DESCRIPTION="Free media library that is intended for use with a plex client"
 HOMEPAGE="https://www.plex.tv/"
 SRC_URI="
 	amd64? ( ${MY_URI}/${MY_PV}/debian/plexmediaserver_${MY_PV}_amd64.deb )
+	arm? ( ${MY_URI}/${MY_PV}/debian/plexmediaserver_${MY_PV}_armhf.deb )
 	arm64? ( ${MY_URI}/${MY_PV}/debian/plexmediaserver_${MY_PV}_arm64.deb )
 	x86? ( ${MY_URI}/${MY_PV}/debian/plexmediaserver_${MY_PV}_i386.deb )
 "
