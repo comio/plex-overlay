@@ -32,4 +32,4 @@ Note: Plex Pass users can add the "~amd64" or "~x86" keywords to the packages to
 Special Thanks
 --------------
 
-I would like to thank Foster McLane for her overlay (https://github.com/fkmclane/overlay) that has been the starting point for this work.
+I would like to thank Lily Foster for her overlay (https://github.com/lilyinstarlight/overlay) that has been the starting point for this work.
