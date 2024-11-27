@@ -1,11 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="8"
 
 DESCRIPTION="Firmware for Hauppauge and WinTV tuners"
 HOMEPAGE="http://www.hauppauge.com/site/support/linux.html"
-UBUNTU_RELEASE="jammy"
+UBUNTU_RELEASE="noble"
 SRC_URI="https://launchpad.net/~b-rad/+archive/ubuntu/kernel+mediatree+hauppauge/+files/${PN}_${PV}+${UBUNTU_RELEASE}.tar.gz"
 
 LICENSE="Hauppauge-Firmware"
