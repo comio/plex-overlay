@@ -1,0 +1,7 @@
+# 
+# Issue Upgrading to PMS 1.43.0.10467 on Debian and RHEL
+#
+# See https://forums.plex.tv/t/issue-upgrading-to-pms-1-43-0-10467-on-debian-and-rhel/935847
+# and https://forums.plex.tv/t/plex-media-server/30447/698
+#
+=media-tv/plex-media-server-1.43.0.10467
