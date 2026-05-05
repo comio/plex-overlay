@@ -31,7 +31,7 @@ LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="-* amd64 ~arm arm64 ~x86"
 IUSE="verify-sig"
-RESTRICT="mirrot bindist"
+RESTRICT="mirror bindist"
 
 DEPEND="
 	acct-group/plex
