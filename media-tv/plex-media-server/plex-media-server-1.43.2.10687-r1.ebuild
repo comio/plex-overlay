@@ -31,13 +31,13 @@ S="${WORKDIR}"
 LICENSE="all-rights-reserved"
 SLOT="0"
 if [[ ${BETA} -eq 0 ]]; then
-	KEYWORDS="-* ~amd64 ~arm ~arm64 ~x86"
+	KEYWORDS="-* amd64 ~arm arm64 ~x86"
 	IUSE="verify-sig"
 	BDEPEND="
 		verify-sig? ( >=sec-keys/openpgp-keys-plexmediaserver-20240120 )
 	"
 else
-	KEYWORDS="-* amd64 ~arm arm64 ~x86"
+	KEYWORDS="-* ~amd64 ~arm ~arm64 ~x86"
 	IUSE=""
 	BDEPEND=""
 fi
