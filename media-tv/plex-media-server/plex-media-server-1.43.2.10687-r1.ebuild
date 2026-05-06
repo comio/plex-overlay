@@ -7,7 +7,8 @@ VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/plexmediaserver.asc
 
 inherit eapi9-pipestatus readme.gentoo-r1 systemd unpacker pax-utils verify-sig
 
-MY_PV="${PV}-1e34174b1"
+MY_PV="${PV}-563d026ea"
+BETA=1
 MY_URI="https://downloads.plex.tv/plex-media-server-new"
 
 DESCRIPTION="Free media library that is intended for use with a plex client"
@@ -29,17 +30,24 @@ S="${WORKDIR}"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
-KEYWORDS="-* amd64 ~arm arm64 ~x86"
-IUSE="verify-sig"
+if [[ ${BETA} -eq 0 ]]; then
+	KEYWORDS="-* ~amd64 ~arm ~arm64 ~x86"
+	IUSE="verify-sig"
+	BDEPEND="
+		verify-sig? ( >=sec-keys/openpgp-keys-plexmediaserver-20240120 )
+	"
+else
+	KEYWORDS="-* amd64 ~arm arm64 ~x86"
+	IUSE=""
+	BDEPEND=""
+fi
+
 RESTRICT="mirror bindist"
 
 DEPEND="
 	acct-group/plex
 	acct-user/plex"
 RDEPEND="${DEPEND}"
-BDEPEND="
-	verify-sig? ( >=sec-keys/openpgp-keys-plexmediaserver-20240120 )
-"
 
 PATCHES=(
 	"${FILESDIR}/${PN}.service.patch"
@@ -54,7 +62,7 @@ QA_MULTILIB_PATHS=(
 )
 
 src_unpack() {
-	if use verify-sig; then
+	if $BETA -eq 0 && use verify-sig; then
 		local deb_arch=${ARCH}
 		[[ ${ARCH} == arm ]] && deb_arch=armhf
 		[[ ${ARCH} == x86 ]] && deb_arch=i386
