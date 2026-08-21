@@ -15,6 +15,7 @@
 	</maintainer>
 	<upstream>
 		<changelog>https://forums.plex.tv/t/plex-media-server/30447/</changelog>
+		<doc>https://support.plex.tv/articles/235974187-enable-repository-updating-for-supported-linux-server-distributions/</doc>
 		<doc>https://support.plex.tv/articles/200264746-quick-start-step-by-step-guides/</doc>
 	</upstream>
 </pkgmetadata>
