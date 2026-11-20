@@ -8,9 +8,6 @@ start() {
 
 stop() {
 	ebegin "Stopping Plex Media Server"
-	kill -- -`cat ${PLEX_PIDFILE}`
-
-	# Remove stale pid file since this is a dirty solution
-	rm ${PLEX_PIDFILE}
+	start-stop-daemon --stop --retry SIGTERM/10 --pidfile "${PLEX_PIDFILE}"
 	eend $?
 }
